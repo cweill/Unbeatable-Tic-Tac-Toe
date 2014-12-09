@@ -23,4 +23,6 @@
 
 - (void)drawGameState:(TTTGameState *)state;
 
+- (void)reset;
+
 @end

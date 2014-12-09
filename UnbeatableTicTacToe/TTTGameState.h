@@ -10,8 +10,17 @@
 
 @interface TTTGameState : NSObject
 
-@property (copy, nonatomic) NSArray *state;
-@property (copy, nonatomic) NSString *currentPlayer;
-@property (copy, nonatomic) NSDictionary *moves;
+enum TTTGameStateStatus : NSUInteger {
+  TTTGameStatusInPlay = 1,
+  TTTGameStatusPlayerXWon = 2,
+  TTTGameStatusPlayerOWon = 3,
+  TTTGameStatusDraw = 4
+};
+
+@property (copy, nonatomic, readonly) NSArray *state;
+@property (copy, nonatomic, readonly) NSString *currentPlayer;
+@property (nonatomic, readonly) enum TTTGameStateStatus status;
+
+- (TTTGameState *)makeMove:(NSUInteger)move;
 
 @end

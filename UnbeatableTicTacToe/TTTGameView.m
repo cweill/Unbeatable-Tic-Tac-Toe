@@ -77,6 +77,12 @@
   }
 }
 
+- (void)reset {
+  for (UIButton *tile in _tiles) {
+    [tile setTitle:@"" forState:UIControlStateNormal];
+  }
+}
+
 - (void)tileTapped:(UIButton *)sender {
   NSUInteger tileID = [_tiles indexOfObject:sender];
   [self.delegate gameView:self didTapTile:tileID];
