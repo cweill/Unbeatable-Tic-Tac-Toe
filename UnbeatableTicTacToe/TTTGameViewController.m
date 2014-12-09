@@ -7,31 +7,47 @@
 //
 
 #import "TTTGameViewController.h"
+#import "TTTGameView.h"
+#import "TTTGameState.h"
 
-@interface TTTGameViewController ()
+@interface TTTGameViewController () <TTTGameViewDelegate>
+
+@property (strong, nonatomic) TTTGameState *gameTree;
+@property (strong, nonatomic) TTTGameState *currentState;
+@property (strong, nonatomic) TTTGameView *gameView;
 
 @end
 
 @implementation TTTGameViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _gameTree = [TTTGameState new];
+    _currentState = _gameTree;
+  }
+  return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)loadView{
+  self.view = [UIView new];
+  _gameView = [TTTGameView new];
+  _gameView.delegate = self;
+  [self.view addSubview:_gameView];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillLayoutSubviews {
+  [super viewWillLayoutSubviews];
+  
+  _gameView.frame = self.view.frame;
 }
-*/
+
+- (void)gameView:(TTTGameView *)gameView didTapTile:(NSUInteger)tile {
+  TTTGameState *nextState = _currentState.moves[@(tile)];
+  if (nextState) {
+    _currentState = nextState;
+    [gameView drawGameState:nextState];
+  }
+}
 
 @end

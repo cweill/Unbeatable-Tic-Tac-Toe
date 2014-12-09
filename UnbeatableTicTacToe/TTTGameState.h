@@ -10,4 +10,8 @@
 
 @interface TTTGameState : NSObject
 
+@property (copy, nonatomic) NSArray *state;
+@property (copy, nonatomic) NSString *currentPlayer;
+@property (copy, nonatomic) NSDictionary *moves;
+
 @end

@@ -14,6 +14,9 @@
 		21F4B9A21A36AB9700DD03D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F4B9A11A36AB9700DD03D6 /* Images.xcassets */; };
 		21F4B9A51A36AB9700DD03D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F4B9A31A36AB9700DD03D6 /* LaunchScreen.xib */; };
 		21F4B9B11A36AB9700DD03D6 /* UnbeatableTicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9B01A36AB9700DD03D6 /* UnbeatableTicTacToeTests.m */; };
+		21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9BE1A36AC4C00DD03D6 /* TTTGameState.m */; };
+		21F4B9C21A36ACD500DD03D6 /* TTTGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */; };
+		21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		21F4B9AA1A36AB9700DD03D6 /* UnbeatableTicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnbeatableTicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F4B9AF1A36AB9700DD03D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21F4B9B01A36AB9700DD03D6 /* UnbeatableTicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnbeatableTicTacToeTests.m; sourceTree = "<group>"; };
+		21F4B9BD1A36AC4C00DD03D6 /* TTTGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTGameState.h; sourceTree = "<group>"; };
+		21F4B9BE1A36AC4C00DD03D6 /* TTTGameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGameState.m; sourceTree = "<group>"; };
+		21F4B9C01A36ACD500DD03D6 /* TTTGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTGameView.h; sourceTree = "<group>"; };
+		21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGameView.m; sourceTree = "<group>"; };
+		21F4B9C31A36B31800DD03D6 /* TTTGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTGameViewController.h; sourceTree = "<group>"; };
+		21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGameViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,9 @@
 		21F4B9931A36AB9600DD03D6 /* UnbeatableTicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				21F4B9BB1A36ABB500DD03D6 /* Views */,
+				21F4B9BC1A36ABBB00DD03D6 /* Controllers */,
+				21F4B9BA1A36ABA500DD03D6 /* Models */,
 				21F4B9981A36AB9700DD03D6 /* AppDelegate.h */,
 				21F4B9991A36AB9700DD03D6 /* AppDelegate.m */,
 				21F4B99B1A36AB9700DD03D6 /* ViewController.h */,
@@ -117,6 +129,33 @@
 				21F4B9AF1A36AB9700DD03D6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		21F4B9BA1A36ABA500DD03D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21F4B9BD1A36AC4C00DD03D6 /* TTTGameState.h */,
+				21F4B9BE1A36AC4C00DD03D6 /* TTTGameState.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		21F4B9BB1A36ABB500DD03D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21F4B9C01A36ACD500DD03D6 /* TTTGameView.h */,
+				21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		21F4B9BC1A36ABBB00DD03D6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				21F4B9C31A36B31800DD03D6 /* TTTGameViewController.h */,
+				21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +258,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */,
 				21F4B99D1A36AB9700DD03D6 /* ViewController.m in Sources */,
 				21F4B99A1A36AB9700DD03D6 /* AppDelegate.m in Sources */,
+				21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */,
+				21F4B9C21A36ACD500DD03D6 /* TTTGameView.m in Sources */,
 				21F4B9971A36AB9700DD03D6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

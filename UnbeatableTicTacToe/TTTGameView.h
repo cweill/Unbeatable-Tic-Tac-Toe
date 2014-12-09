@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTTGameState;
+@class TTTGameView;
+
+@protocol TTTGameViewDelegate <NSObject>
+
+- (void)gameView:(TTTGameView *)gameView didTapTile:(NSUInteger)tile;
+
+@end
+
 @interface TTTGameView : UIView
+
+@property (weak, nonatomic) id <TTTGameViewDelegate> delegate;
+
+- (void)drawGameState:(TTTGameState *)state;
 
 @end
