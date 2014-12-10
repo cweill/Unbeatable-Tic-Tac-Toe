@@ -30,8 +30,6 @@ enum TTTGameStateStatus : NSUInteger {
 
 - (TTTGameState *)makeMove:(NSUInteger)move;
 
-- (TTTGameState *)bestMove;
-
 // Valid moves. The keys are the indeces of the tiles and the values are the next state
 - (NSDictionary *)moves;
 

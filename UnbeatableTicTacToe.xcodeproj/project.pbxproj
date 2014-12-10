@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		21F4B9971A36AB9700DD03D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9961A36AB9600DD03D6 /* main.m */; };
 		21F4B99A1A36AB9700DD03D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9991A36AB9700DD03D6 /* AppDelegate.m */; };
-		21F4B99D1A36AB9700DD03D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B99C1A36AB9700DD03D6 /* ViewController.m */; };
 		21F4B9A01A36AB9700DD03D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F4B99E1A36AB9700DD03D6 /* Main.storyboard */; };
 		21F4B9A21A36AB9700DD03D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F4B9A11A36AB9700DD03D6 /* Images.xcassets */; };
 		21F4B9A51A36AB9700DD03D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F4B9A31A36AB9700DD03D6 /* LaunchScreen.xib */; };
@@ -38,8 +37,6 @@
 		21F4B9961A36AB9600DD03D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		21F4B9981A36AB9700DD03D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21F4B9991A36AB9700DD03D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		21F4B99B1A36AB9700DD03D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		21F4B99C1A36AB9700DD03D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		21F4B99F1A36AB9700DD03D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21F4B9A11A36AB9700DD03D6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21F4B9A41A36AB9700DD03D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -104,8 +101,6 @@
 				21F4B9BA1A36ABA500DD03D6 /* Models */,
 				21F4B9981A36AB9700DD03D6 /* AppDelegate.h */,
 				21F4B9991A36AB9700DD03D6 /* AppDelegate.m */,
-				21F4B99B1A36AB9700DD03D6 /* ViewController.h */,
-				21F4B99C1A36AB9700DD03D6 /* ViewController.m */,
 				21F4B99E1A36AB9700DD03D6 /* Main.storyboard */,
 				21F4B9A11A36AB9700DD03D6 /* Images.xcassets */,
 				21F4B9A31A36AB9700DD03D6 /* LaunchScreen.xib */,
@@ -150,7 +145,7 @@
 				21F4B9C91A37EA4100DD03D6 /* TTTPlayerAI.h */,
 				21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		21F4B9BB1A36ABB500DD03D6 /* Views */ = {
@@ -159,7 +154,7 @@
 				21F4B9C01A36ACD500DD03D6 /* TTTGameView.h */,
 				21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		21F4B9BC1A36ABBB00DD03D6 /* Controllers */ = {
@@ -170,7 +165,7 @@
 				21F4B9C31A36B31800DD03D6 /* TTTGameViewController.h */,
 				21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +270,6 @@
 			files = (
 				21F4B9CE1A3808B500DD03D6 /* TTTHomeViewController.m in Sources */,
 				21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */,
-				21F4B99D1A36AB9700DD03D6 /* ViewController.m in Sources */,
 				21F4B99A1A36AB9700DD03D6 /* AppDelegate.m in Sources */,
 				21F4B9CB1A37EA4100DD03D6 /* TTTPlayerAI.m in Sources */,
 				21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */,
