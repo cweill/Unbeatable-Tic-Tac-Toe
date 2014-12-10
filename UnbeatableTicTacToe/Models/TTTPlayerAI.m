@@ -17,7 +17,7 @@
     return [state makeMove:arc4random_uniform(9)];
   }
   
-  // Min max algorithm to determine the best next move for the given player
+  // Maximise move scores using min max algo to determine the best move
   TTTGameState *bestMove;
   int bestRank = -99;
   for (TTTGameState *move in [state moves].allValues) {
@@ -35,6 +35,7 @@
     return [self rankForGameState:state];
   }
   
+  // Recursively descend game tree to obtain best ranks for each move
   NSMutableArray *ranks = [NSMutableArray new];
   for (TTTGameState *move in [state moves].allValues) {
     int rank = [self minMaxForForGameState:move];
@@ -57,6 +58,7 @@
   return bestRank;
 }
 
+// The value of the given state. +10 if it's a win, -10 for a lose, and 0 for a draw
 - (int)rankForGameState:(TTTGameState *)state{
   switch (state.status) {
     case TTTGameStatusDraw:

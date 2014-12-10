@@ -26,6 +26,7 @@
 
 - (void)loadView {
   self.view = [UIView new];
+  self.view.backgroundColor = [UIColor whiteColor];
   
   _labelX = [UILabel new];
   _labelX.text = @"Player X";
@@ -90,6 +91,7 @@
 }
 
 - (void)didSelectPlayer {
+  // Must have at least one non-AI player
   if (_playerXChoice.selectedSegmentIndex == 0 || _playerOChoice.selectedSegmentIndex == 0) {
     _startButton.enabled = YES;
   } else {
