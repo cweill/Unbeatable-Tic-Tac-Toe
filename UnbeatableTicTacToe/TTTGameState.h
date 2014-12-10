@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TTTPlayer.h"
 
 @interface TTTGameState : NSObject
 
@@ -17,12 +18,19 @@ enum TTTGameStateStatus : NSUInteger {
   TTTGameStatusDraw = 4
 };
 
+@property (strong, nonatomic, readonly) TTTPlayer *playerX;
+@property (strong, nonatomic, readonly) TTTPlayer *playerO;
 @property (copy, nonatomic, readonly) NSArray *state; // The board represented as an array of size 9
-@property (copy, nonatomic, readonly) NSString *currentPlayer;
+@property (strong, nonatomic, readonly) TTTPlayer *currentPlayer;
 @property (nonatomic, readonly) enum TTTGameStateStatus status;
+
+- (instancetype)initWithPlayerX:(TTTPlayer *)playerX playerO:(TTTPlayer *)playerO;
 
 - (TTTGameState *)makeMove:(NSUInteger)move;
 
 - (TTTGameState *)bestMove;
+
+// Valid moves. The keys are the indeces of the tiles and the values are the next state
+- (NSDictionary *)moves;
 
 @end

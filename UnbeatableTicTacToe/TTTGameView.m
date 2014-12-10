@@ -73,7 +73,11 @@
 
 - (void)drawGameState:(TTTGameState *)gameState {
   for (int i=0; i<gameState.state.count; i++) {
-    [_tiles[i] setTitle:gameState.state[i] forState:UIControlStateNormal];
+    if (![gameState.state[i] isEqual:[NSNull null]]) {
+      TTTPlayer *playerOnTile = gameState.state[i];
+      [_tiles[i] setTitle:playerOnTile.letter
+                 forState:UIControlStateNormal];
+    }
   }
 }
 

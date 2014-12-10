@@ -9,6 +9,7 @@
 #import "TTTGameViewController.h"
 #import "TTTGameView.h"
 #import "TTTGameState.h"
+#import "TTTPlayerAI.h"
 
 @interface TTTGameViewController () <TTTGameViewDelegate>
 
@@ -25,7 +26,10 @@
 - (instancetype)init {
   self = [super init];
   if (self) {
-    _gameTree = [TTTGameState new];
+    TTTPlayer *playerX = [[TTTPlayer alloc] initWithLetter:@"X"];
+    TTTPlayer *playerO = [[TTTPlayerAI alloc] initWithLetter:@"O"];
+    
+    _gameTree = [[TTTGameState alloc] initWithPlayerX:playerX playerO:playerO];
     _currentState = _gameTree;
   }
   return self;
@@ -72,14 +76,30 @@
 }
 
 - (void)gameView:(TTTGameView *)gameView didTapTile:(NSUInteger)tile {
+  if ([_currentState.currentPlayer isKindOfClass:[TTTPlayerAI class]]) return;
   TTTGameState *nextState = [_currentState makeMove:tile];
-  [self displayNextState:nextState];
-  [self playAI];
+  if (nextState) {
+    [self displayNextState:nextState];
+    if ([nextState.currentPlayer isKindOfClass:[TTTPlayerAI class]]) {;
+      [self playAI];
+    }
+  }
 }
 
 - (void)playAI {
-  if (_currentState.status == TTTGameStatusInPlay) {
-    [self displayNextState:[_currentState bestMove]];
+  if (_currentState.status == TTTGameStatusInPlay &&
+      [_currentState.currentPlayer isKindOfClass:[TTTPlayerAI class]]) {
+    TTTPlayerAI *playerAI = (TTTPlayerAI *)_currentState.currentPlayer;
+    
+    // Run Min Max in background since otherwise it will hog the UI thread
+    __weak TTTGameViewController *weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      TTTGameState *bestMove = [playerAI bestMoveForGameState:weakSelf.currentState];
+      
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf displayNextState:bestMove];
+      });
+    });
   }
 }
 
@@ -107,7 +127,7 @@
       _gameStatusLabel.text = @"Player O Won!";
       break;
     default:
-      _gameStatusLabel.text = [NSString stringWithFormat:@"Player %@'s Move", _currentState.currentPlayer];
+      _gameStatusLabel.text = [NSString stringWithFormat:@"Player %@'s Move", _currentState.currentPlayer.letter];
       break;
   }
 }

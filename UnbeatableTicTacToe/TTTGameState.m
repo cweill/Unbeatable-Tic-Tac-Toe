@@ -10,8 +10,10 @@
 
 @interface TTTGameState ()
 
+@property (strong, nonatomic) TTTPlayer *playerX;
+@property (strong, nonatomic) TTTPlayer *playerO;
 @property (copy, nonatomic) NSArray *state;
-@property (copy, nonatomic) NSString *currentPlayer;
+@property (strong, nonatomic) TTTPlayer *currentPlayer;
 @property (nonatomic) enum TTTGameStateStatus status;
 
 @end
@@ -21,19 +23,35 @@
 - (instancetype)init {
   self = [super init];
   if (self) {
-    _state = @[@"", @"", @"", @"", @"", @"", @"", @"", @""];
-    _currentPlayer = @"X";
+    // The board
+    _state = @[[NSNull null], [NSNull null], [NSNull null],
+               [NSNull null], [NSNull null], [NSNull null],
+               [NSNull null], [NSNull null], [NSNull null]];
     _status = TTTGameStatusInPlay;
   }
   
   return self;
 }
 
-- (instancetype)initWithState:(NSArray *)state player:(NSString *)player {
-  self = [super init];
+- (instancetype)initWithPlayerX:(TTTPlayer *)playerX playerO:(TTTPlayer *)playerO {
+  self = [self init];
+  if (self) {
+    _currentPlayer = playerX;
+    _playerO = playerO;
+    _playerX = playerX;
+  }
+  
+  return self;
+}
+
+- (instancetype)initWithPlayerX:(TTTPlayer *)playerX
+                        playerO:(TTTPlayer *)playerO
+                          state:(NSArray *)state
+                  currentPlayer:(TTTPlayer *)currentPlayer {
+  self = [self initWithPlayerX:playerX playerO:playerO];
   if (self) {
     _state = state;
-    _currentPlayer = player;
+    _currentPlayer = currentPlayer;
   }
   _status = [self determineStatus];
   
@@ -41,9 +59,9 @@
 }
 
 - (enum TTTGameStateStatus)determineStatus {
-  if ([self didPlayerWin:@"X"]) {
+  if ([self didPlayerWin:_playerX]) {
     return TTTGameStatusPlayerXWon;
-  } else if ([self didPlayerWin:@"O"]) {
+  } else if ([self didPlayerWin:_playerO]) {
     return TTTGameStatusPlayerOWon;
   } else if ([self canStillMove]) {
     return TTTGameStatusInPlay;
@@ -52,33 +70,33 @@
   }
 }
 
-- (BOOL)didPlayerWin:(NSString *)player {
+- (BOOL)didPlayerWin:(TTTPlayer *)player {
   // Horizontal
   for (int i = 0; i < 3; i++) {
-    if ([_state[i * 3] isEqualToString:player] &&
-        [_state[1 + i * 3] isEqualToString:player] &&
-        [_state[2 + i * 3] isEqualToString:player]) {
+    if (_state[i * 3] == player &&
+        _state[1 + i * 3] == player &&
+        _state[2 + i * 3] == player) {
       return true;
     }
   }
   
   // Vertical
   for (int i = 0; i < 3; i++) {
-    if ([_state[i] isEqualToString:player] &&
-        [_state[i + 3] isEqualToString:player] &&
-        [_state[i + 6] isEqualToString:player]) {
+    if (_state[i] == player &&
+        _state[i + 3] == player &&
+        _state[i + 6] == player) {
       return true;
     }
   }
   
   // Diagonal
-  if ([_state[0] isEqualToString:player] &&
-      [_state[4] isEqualToString:player] &&
-      [_state[8] isEqualToString:player]) {
+  if (_state[0] == player &&
+      _state[4] == player &&
+      _state[8] == player) {
     return true;
-  } else if ([_state[2] isEqualToString:player] &&
-      [_state[4] isEqualToString:player] &&
-      [_state[6] isEqualToString:player]) {
+  } else if (_state[2] == player &&
+      _state[4] == player &&
+      _state[6] == player) {
     return true;
   }
   return false;
@@ -86,23 +104,25 @@
 
 - (BOOL)canStillMove {
   for (NSString *move in _state) {
-    if ([move isEqualToString:@""]) {
+    if ([[NSNull null] isEqual:move]) {
       return true;
     }
   }
   return false;
 }
 
-// Valid moves. The keys are the indeces of the tiles and the values are the next state
 - (NSDictionary *)moves {
   NSMutableDictionary *temp = [NSMutableDictionary new];
   if (_status == TTTGameStatusInPlay) {
     for (int i = 0; i< _state.count; i++) {
-      if ([@"" isEqualToString:_state[i]]) {
-        NSString *nextPlayer = [_currentPlayer isEqualToString:@"X"] ? @"O" : @"X";
+      if ([[NSNull null] isEqual:_state[i]]) { // Valid move
+        TTTPlayer *nextPlayer = _currentPlayer == _playerX ? _playerO : _playerX;
         NSMutableArray *nextState = [_state mutableCopy];
         nextState[i] = _currentPlayer;
-        TTTGameState *newState = [[TTTGameState alloc] initWithState:nextState player:nextPlayer];
+        TTTGameState *newState = [[TTTGameState alloc] initWithPlayerX:_playerX
+                                                               playerO:_playerO
+                                                                 state:nextState
+                                                         currentPlayer:nextPlayer];
         temp[@(i)] = newState;
       }
     }
@@ -112,60 +132,6 @@
 
 - (TTTGameState *)makeMove:(NSUInteger)move {
   return [self moves][@(move)];
-}
-
-- (TTTGameState *)bestMove {
-  // Min max algorithm to determine the best next move for the given player
-  TTTGameState *bestMove;
-  int bestRank = -99;
-  for (TTTGameState *move in [self moves].allValues) {
-    int rank = [move minMaxForPlayer:_currentPlayer depth:0];
-    if (rank > bestRank) {
-      bestMove = move;
-      bestRank = rank;
-    }
-  }
-  return bestMove;
-}
-
-- (int)minMaxForPlayer:(NSString *)player depth:(int)depth {
-  if (_status != TTTGameStatusInPlay) {
-    return [self rankForPlayer:player depth:depth];
-  }
-  
-  NSMutableArray *ranks = [NSMutableArray new];
-  for (TTTGameState *move in [self moves].allValues) {
-    int rank = [move minMaxForPlayer:player depth:depth + 1];
-    [ranks addObject:[NSNumber numberWithInt:rank]];
-  }
-  
-  int bestRank = [ranks.firstObject intValue];
-  for (NSNumber *rank in ranks) {
-    int currentRank = [rank intValue];
-    if ([player isEqualToString:_currentPlayer]) {
-      if (currentRank > bestRank) {
-        bestRank = currentRank;
-      }
-    } else {
-      if (currentRank < bestRank) {
-        bestRank = currentRank;
-      }
-    }
-  }
-  return bestRank;
-}
-
-- (int)rankForPlayer:(NSString *)player depth:(int)depth {
-  switch (_status) {
-    case TTTGameStatusDraw:
-      return 0;
-    case TTTGameStatusPlayerXWon:
-      return [player isEqualToString:@"X"] ? 10 - depth : depth - 10;
-    case TTTGameStatusPlayerOWon:
-      return [player isEqualToString:@"O"] ? 10 - depth : depth - 10;
-    default:
-      return 0;
-  }
 }
 
 @end

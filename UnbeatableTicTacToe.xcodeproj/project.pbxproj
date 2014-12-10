@@ -17,6 +17,8 @@
 		21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9BE1A36AC4C00DD03D6 /* TTTGameState.m */; };
 		21F4B9C21A36ACD500DD03D6 /* TTTGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */; };
 		21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */; };
+		21F4B9C81A37E9B600DD03D6 /* TTTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C71A37E9B600DD03D6 /* TTTPlayer.m */; };
+		21F4B9CB1A37EA4100DD03D6 /* TTTPlayerAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		21F4B9C11A36ACD500DD03D6 /* TTTGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGameView.m; sourceTree = "<group>"; };
 		21F4B9C31A36B31800DD03D6 /* TTTGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTGameViewController.h; sourceTree = "<group>"; };
 		21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGameViewController.m; sourceTree = "<group>"; };
+		21F4B9C61A37E9B600DD03D6 /* TTTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTPlayer.h; sourceTree = "<group>"; };
+		21F4B9C71A37E9B600DD03D6 /* TTTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTPlayer.m; sourceTree = "<group>"; };
+		21F4B9C91A37EA4100DD03D6 /* TTTPlayerAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTPlayerAI.h; sourceTree = "<group>"; };
+		21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTPlayerAI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,10 @@
 			children = (
 				21F4B9BD1A36AC4C00DD03D6 /* TTTGameState.h */,
 				21F4B9BE1A36AC4C00DD03D6 /* TTTGameState.m */,
+				21F4B9C61A37E9B600DD03D6 /* TTTPlayer.h */,
+				21F4B9C71A37E9B600DD03D6 /* TTTPlayer.m */,
+				21F4B9C91A37EA4100DD03D6 /* TTTPlayerAI.h */,
+				21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -261,8 +271,10 @@
 				21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */,
 				21F4B99D1A36AB9700DD03D6 /* ViewController.m in Sources */,
 				21F4B99A1A36AB9700DD03D6 /* AppDelegate.m in Sources */,
+				21F4B9CB1A37EA4100DD03D6 /* TTTPlayerAI.m in Sources */,
 				21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */,
 				21F4B9C21A36ACD500DD03D6 /* TTTGameView.m in Sources */,
+				21F4B9C81A37E9B600DD03D6 /* TTTPlayer.m in Sources */,
 				21F4B9971A36AB9700DD03D6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
