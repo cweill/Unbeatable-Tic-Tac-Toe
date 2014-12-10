@@ -17,26 +17,25 @@
 @property (strong, nonatomic) TTTGameState *currentState; // Current node in game state tree
 @property (strong, nonatomic) TTTGameView *gameView;
 @property (strong, nonatomic) UIButton *resetButton;
+@property (strong, nonatomic) UIButton *dismissGameButton;
 @property (strong, nonatomic) UILabel *gameStatusLabel;
 
 @end
 
 @implementation TTTGameViewController
 
-- (instancetype)init {
-  self = [super init];
+- (instancetype)initWithGameState:(TTTGameState *)state {
+  self = [self init];
   if (self) {
-    TTTPlayer *playerX = [[TTTPlayer alloc] initWithLetter:@"X"];
-    TTTPlayer *playerO = [[TTTPlayerAI alloc] initWithLetter:@"O"];
-    
-    _gameTree = [[TTTGameState alloc] initWithPlayerX:playerX playerO:playerO];
-    _currentState = _gameTree;
+    _gameTree = state;
+    _currentState = state;
   }
   return self;
 }
 
 - (void)loadView{
   self.view = [UIView new];
+  self.view.backgroundColor = [UIColor whiteColor];
   
   _gameView = [TTTGameView new];
   _gameView.delegate = self;
@@ -50,9 +49,20 @@
                    action:@selector(resetGame)
          forControlEvents:UIControlEventTouchUpInside];
   
+  _dismissGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+  [_dismissGameButton setTitle:@"New Game" forState:UIControlStateNormal];
+  [_dismissGameButton addTarget:self
+                        action:@selector(dismissGame)
+              forControlEvents:UIControlEventTouchUpInside];
+  
   [self.view addSubview:_gameView];
   [self.view addSubview:_gameStatusLabel];
+  [self.view addSubview:_dismissGameButton];
   [self.view addSubview:_resetButton];
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
   
   [self resetGame];
 }
@@ -69,10 +79,15 @@
                                       self.view.frame.size.width,
                                       20);
   
-  _resetButton.frame = CGRectMake(0,
-                                  self.view.frame.size.height - 80,
-                                  self.view.frame.size.width,
-                                  80);
+  _dismissGameButton.frame = CGRectMake(0,
+                                        self.view.frame.size.height - 100,
+                                        self.view.frame.size.width / 2,
+                                        100);
+  
+  _resetButton.frame = CGRectMake(self.view.frame.size.width / 2,
+                                  self.view.frame.size.height - 100,
+                                  self.view.frame.size.width / 2,
+                                  100);
 }
 
 - (void)gameView:(TTTGameView *)gameView didTapTile:(NSUInteger)tile {
@@ -109,9 +124,6 @@
     [_gameView drawGameState:nextState];
     
     [self displayGameStatusText];
-    if (nextState.status != TTTGameStatusInPlay) {
-      _resetButton.hidden = NO;
-    }
   }
 }
 
@@ -135,8 +147,13 @@
 - (void)resetGame {
   [_gameView reset]; // Reset view
   _currentState = _gameTree; // Reset game state
-  _resetButton.hidden = YES;
   [self displayGameStatusText];
+  
+  [self playAI];
+}
+
+- (void)dismissGame {
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

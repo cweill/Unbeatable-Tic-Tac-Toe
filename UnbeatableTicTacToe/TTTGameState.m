@@ -134,4 +134,8 @@
   return [self moves][@(move)];
 }
 
+- (BOOL)isNewGame {
+  return [self moves].count == 9;
+}
+
 @end

@@ -19,6 +19,7 @@
 		21F4B9C51A36B31800DD03D6 /* TTTGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */; };
 		21F4B9C81A37E9B600DD03D6 /* TTTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9C71A37E9B600DD03D6 /* TTTPlayer.m */; };
 		21F4B9CB1A37EA4100DD03D6 /* TTTPlayerAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */; };
+		21F4B9CE1A3808B500DD03D6 /* TTTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F4B9CD1A3808B500DD03D6 /* TTTHomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		21F4B9C71A37E9B600DD03D6 /* TTTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTPlayer.m; sourceTree = "<group>"; };
 		21F4B9C91A37EA4100DD03D6 /* TTTPlayerAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTPlayerAI.h; sourceTree = "<group>"; };
 		21F4B9CA1A37EA4100DD03D6 /* TTTPlayerAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTPlayerAI.m; sourceTree = "<group>"; };
+		21F4B9CC1A3808B500DD03D6 /* TTTHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTHomeViewController.h; sourceTree = "<group>"; };
+		21F4B9CD1A3808B500DD03D6 /* TTTHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTHomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,8 @@
 		21F4B9BC1A36ABBB00DD03D6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21F4B9CC1A3808B500DD03D6 /* TTTHomeViewController.h */,
+				21F4B9CD1A3808B500DD03D6 /* TTTHomeViewController.m */,
 				21F4B9C31A36B31800DD03D6 /* TTTGameViewController.h */,
 				21F4B9C41A36B31800DD03D6 /* TTTGameViewController.m */,
 			);
@@ -268,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F4B9CE1A3808B500DD03D6 /* TTTHomeViewController.m in Sources */,
 				21F4B9BF1A36AC4C00DD03D6 /* TTTGameState.m in Sources */,
 				21F4B99D1A36AB9700DD03D6 /* ViewController.m in Sources */,
 				21F4B99A1A36AB9700DD03D6 /* AppDelegate.m in Sources */,

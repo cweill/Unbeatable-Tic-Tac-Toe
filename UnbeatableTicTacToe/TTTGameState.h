@@ -26,6 +26,8 @@ enum TTTGameStateStatus : NSUInteger {
 
 - (instancetype)initWithPlayerX:(TTTPlayer *)playerX playerO:(TTTPlayer *)playerO;
 
+- (BOOL)isNewGame;
+
 - (TTTGameState *)makeMove:(NSUInteger)move;
 
 - (TTTGameState *)bestMove;

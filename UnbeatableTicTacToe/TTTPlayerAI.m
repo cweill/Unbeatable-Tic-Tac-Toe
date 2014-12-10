@@ -12,6 +12,11 @@
 @implementation TTTPlayerAI
 
 - (TTTGameState *)bestMoveForGameState:(TTTGameState *)state {
+  // If first player to go, play anything to speed up game
+  if ([state isNewGame]) {
+    return [state makeMove:arc4random_uniform(9)];
+  }
+  
   // Min max algorithm to determine the best next move for the given player
   TTTGameState *bestMove;
   int bestRank = -99;

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TTTGameViewController.h"
+#import "TTTHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,7 +23,7 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   
-  [self.window setRootViewController:[TTTGameViewController new]];
+  [self.window setRootViewController:[TTTHomeViewController new]];
   
   [self.window makeKeyAndVisible];
   

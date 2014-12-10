@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTTGameState;
+
 @interface TTTGameViewController : UIViewController
+
+- (instancetype)initWithGameState:(TTTGameState *)state;
 
 @end
