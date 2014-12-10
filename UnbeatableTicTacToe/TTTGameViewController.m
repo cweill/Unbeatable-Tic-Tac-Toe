@@ -12,8 +12,8 @@
 
 @interface TTTGameViewController () <TTTGameViewDelegate>
 
-@property (strong, nonatomic) TTTGameState *gameTree;
-@property (strong, nonatomic) TTTGameState *currentState;
+@property (strong, nonatomic) TTTGameState *gameTree; // The game tree - each node is a game state
+@property (strong, nonatomic) TTTGameState *currentState; // Current node in game state tree
 @property (strong, nonatomic) TTTGameView *gameView;
 @property (strong, nonatomic) UIButton *resetButton;
 @property (strong, nonatomic) UILabel *gameStatusLabel;
@@ -73,9 +73,20 @@
 
 - (void)gameView:(TTTGameView *)gameView didTapTile:(NSUInteger)tile {
   TTTGameState *nextState = [_currentState makeMove:tile];
+  [self displayNextState:nextState];
+  [self playAI];
+}
+
+- (void)playAI {
+  if (_currentState.status == TTTGameStatusInPlay) {
+    [self displayNextState:[_currentState bestMove]];
+  }
+}
+
+- (void)displayNextState:(TTTGameState *)nextState {
   if (nextState) {
     _currentState = nextState;
-    [gameView drawGameState:nextState];
+    [_gameView drawGameState:nextState];
     
     [self displayGameStatusText];
     if (nextState.status != TTTGameStatusInPlay) {

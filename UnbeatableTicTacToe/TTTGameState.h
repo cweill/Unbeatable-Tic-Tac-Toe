@@ -17,10 +17,12 @@ enum TTTGameStateStatus : NSUInteger {
   TTTGameStatusDraw = 4
 };
 
-@property (copy, nonatomic, readonly) NSArray *state;
+@property (copy, nonatomic, readonly) NSArray *state; // The board represented as an array of size 9
 @property (copy, nonatomic, readonly) NSString *currentPlayer;
 @property (nonatomic, readonly) enum TTTGameStateStatus status;
 
 - (TTTGameState *)makeMove:(NSUInteger)move;
+
+- (TTTGameState *)bestMove;
 
 @end

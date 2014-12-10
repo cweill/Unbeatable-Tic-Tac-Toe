@@ -12,7 +12,6 @@
 
 @property (copy, nonatomic) NSArray *state;
 @property (copy, nonatomic) NSString *currentPlayer;
-@property (copy, nonatomic) NSDictionary *moves;
 @property (nonatomic) enum TTTGameStateStatus status;
 
 @end
@@ -26,7 +25,6 @@
     _currentPlayer = @"X";
     _status = TTTGameStatusInPlay;
   }
-  _moves = [self determineMoves];
   
   return self;
 }
@@ -38,7 +36,6 @@
     _currentPlayer = player;
   }
   _status = [self determineStatus];
-  _moves = [self determineMoves];
   
   return self;
 }
@@ -96,8 +93,8 @@
   return false;
 }
 
-
-- (NSDictionary *)determineMoves {
+// Valid moves. The keys are the indeces of the tiles and the values are the next state
+- (NSDictionary *)moves {
   NSMutableDictionary *temp = [NSMutableDictionary new];
   if (_status == TTTGameStatusInPlay) {
     for (int i = 0; i< _state.count; i++) {
@@ -114,7 +111,61 @@
 }
 
 - (TTTGameState *)makeMove:(NSUInteger)move {
-  return _moves[@(move)];
+  return [self moves][@(move)];
+}
+
+- (TTTGameState *)bestMove {
+  // Min max algorithm to determine the best next move for the given player
+  TTTGameState *bestMove;
+  int bestRank = -99;
+  for (TTTGameState *move in [self moves].allValues) {
+    int rank = [move minMaxForPlayer:_currentPlayer depth:0];
+    if (rank > bestRank) {
+      bestMove = move;
+      bestRank = rank;
+    }
+  }
+  return bestMove;
+}
+
+- (int)minMaxForPlayer:(NSString *)player depth:(int)depth {
+  if (_status != TTTGameStatusInPlay) {
+    return [self rankForPlayer:player depth:depth];
+  }
+  
+  NSMutableArray *ranks = [NSMutableArray new];
+  for (TTTGameState *move in [self moves].allValues) {
+    int rank = [move minMaxForPlayer:player depth:depth + 1];
+    [ranks addObject:[NSNumber numberWithInt:rank]];
+  }
+  
+  int bestRank = [ranks.firstObject intValue];
+  for (NSNumber *rank in ranks) {
+    int currentRank = [rank intValue];
+    if ([player isEqualToString:_currentPlayer]) {
+      if (currentRank > bestRank) {
+        bestRank = currentRank;
+      }
+    } else {
+      if (currentRank < bestRank) {
+        bestRank = currentRank;
+      }
+    }
+  }
+  return bestRank;
+}
+
+- (int)rankForPlayer:(NSString *)player depth:(int)depth {
+  switch (_status) {
+    case TTTGameStatusDraw:
+      return 0;
+    case TTTGameStatusPlayerXWon:
+      return [player isEqualToString:@"X"] ? 10 - depth : depth - 10;
+    case TTTGameStatusPlayerOWon:
+      return [player isEqualToString:@"O"] ? 10 - depth : depth - 10;
+    default:
+      return 0;
+  }
 }
 
 @end
